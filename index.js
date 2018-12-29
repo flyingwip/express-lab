@@ -22,6 +22,8 @@ app.engine('hbs', engines.handlebars)
 app.set('views', './views')
 app.set('view engine', 'hbs')
 
+app.use( '/profilepics', express.static('images'))
+
 
 app.get(/big.*/, function (req, res, next) {
   console.log('BIG USER ACCESS')
@@ -44,7 +46,7 @@ app.get('/', function (req, res) {
 
 app.get('/:username', function (req, res) {
 	var username = req.params.username;
-	res.send(username);
+	res.render('user', {username: username})
 })	
 
 var server = app.listen(3000, function () {
